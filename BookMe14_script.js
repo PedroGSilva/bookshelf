@@ -157,7 +157,6 @@ $("#searchB").submit(function(event){
 
 // Footer function
  $(window).ready(function footplace() {
-
    var docHeight = $(window).height();
    var footerHeight = $('#footer').height();
    var footerTop = $('#footer').position().top + footerHeight;
