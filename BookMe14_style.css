@@ -172,11 +172,11 @@ p {
 #firstShelf,#secondShelf{
   margin-top: 5px;
   border-right: 3px solid #845757;
-  border-top: 3px solid #845757;
+  border-top: 1px solid #845757;
 }
 
 #seconShelf,#thirdShelf{
-  border-top: 3px solid #845757;
+  border-top: 1px solid #845757;
 }
 }
 
