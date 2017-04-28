@@ -11,28 +11,17 @@ function Book (isbn,title,author,synopsis,img,links){
 	this.dislikes = 0;
 	this.bookshelf; 
 
-	this.like = function (){
-		this.likes ++;
-	}
- 
-	this.dislike = function(){
-		this.dislikes ++;
-	}
-
 	this.render = function (id){
 		$("#" + id + " .img-rounded").attr("src",this.img);
 		$("#" + id + " .title").html(this.title);
 		$("#" + id + " .author").html(this.author);
 		$("#" + id + " .synopsis").html(this.synopsis);
-		$("#" + id + " .links").html(this.links);
-		$("#" + id + " .numberl").html(this.likes);
-		$("#" + id + " .numberd").html(this.dislikes);
-
+		$("#" + id + " .links").attr("href",this.links);
+		
 		var data = {"book":this, "id":id};
-		$("#" + id + " .btn-like").off("click");
-		$("#" + id + " .btn-like").click(data,function(event){
-			event.data.book.like();
-			event.data.book.render(event.data.id);
+		$("#" + id + " .btn-favorite").off("click");
+		$("#" + id + " .btn-favorite").click(data,function(event){
+			favorite.addFavBook(event.data.book);
 		})
 
 		var data = {"book":this, "id":id};
@@ -51,7 +40,34 @@ function Book (isbn,title,author,synopsis,img,links){
 }
 
 
-// Class Queue---------------------------------------------------------
+function FavoriteBooks (){
+	this.shelffav = new Queue();
+
+	this.addFavBook = function (book){
+		book.favbookshelf = this;	
+		this.shelffav.enqueue(book);
+	}
+
+	this.initFav = function (){
+		var fav1 = this.shelffav.dequeue();
+		var fav2 = this.shelffav.dequeue();
+		var fav3 = this.shelffav.dequeue();
+
+		fav1.render("firstShelf");
+		fav2.render("secondShelf");
+		fav3.render("thirdShelf");
+	}
+
+	this.nextFav = function (coluna){
+			var nextDeq = this.shelffav.dequeue();
+			nextDeq.render(coluna);
+	} 
+}
+
+var favorite = new FavoriteBooks();
+
+
+// Class Queue BookShelf---------------------------------------------------------
 function Queue (){
 	this.data = [];
 
@@ -63,7 +79,6 @@ function Queue (){
 		return this.data.shift();
 	}
 }
-
 
 
 // Class BookShelf-----------------------------------------------------
@@ -117,8 +132,9 @@ function BookShelf (){
 				isbn = newbookshelf.items[i].volumeInfo.industryIdentifiers ?  newbookshelf.items[i].volumeInfo.industryIdentifiers[0].identifier : "undefined isbn";
 				synopsis = newbookshelf.items[i].volumeInfo.description ? newbookshelf.items[i].volumeInfo.description : "Undefined synopsis";
 				cover = newbookshelf.items[i].volumeInfo.imageLinks ? newbookshelf.items[i].volumeInfo.imageLinks.thumbnail : "https://s-media-cache-ak0.pinimg.com/originals/03/e2/a5/03e2a5e009ddafe75460e0692e35efa4.jpg";
+				links = newbookshelf.items[i].volumeInfo ? newbookshelf.items[i].volumeInfo.canonicalVolumeLink : "Undefined link";
 
-				var books = new Book (isbn,title,author,synopsis,cover,"links");
+				var books = new Book (isbn,title,author,synopsis,cover,links);
 		
 				bookShelf1.addBook(books);
 			}
@@ -134,12 +150,11 @@ function BookShelf (){
 
 } 
 
-
-
 // Add Shelf to class BookShelf-----------------------------------------
 var bookShelf1 = new BookShelf();
 
 bookShelf1.load("harry");
+
 
 
 //Search form-----------------------------------------------------------------------
@@ -150,6 +165,12 @@ $("#searchB").submit(function(event){
 	event.preventDefault();
 })
 
+
+// Favorites folder
+$("#favfolder").off("click");	
+$("#favfolder").click(function(event){
+	favorite.initFav();
+})
 
 
 
@@ -162,7 +183,7 @@ $("#searchB").submit(function(event){
    var footerTop = $('#footer').position().top + footerHeight;
 
    if (footerTop < docHeight) {
-    $('#footer').css('margin-top', (docHeight - footerTop - 20) + 'px');
+    $('#footer').css('margin-top', (docHeight - footerTop) + 'px');
    }
   });
 

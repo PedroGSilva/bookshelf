@@ -19,7 +19,7 @@
        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 
-       <link href="BookMe14_style.css" type="text/css" rel="stylesheet">
+       <link href="BookMe16_style.css" type="text/css" rel="stylesheet">
 
        <title> BookMe </title>
      
@@ -56,8 +56,8 @@
                             <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                            <ul class="nav navbar-nav">
-                              <li><a href="#">Best Sellers <span class="sr-only">(current)</span></a></li>
-                              <li><a href="#">Favorites</a></li>
+                              <li><a id="favfolder" href="#">Favorites <span class="sr-only">(current)</span></a></li>
+                              <li><a href="#">Read Next</a></li>
                               <li class="dropdown">
                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Categories <span class="caret"></span></a>
                                  <ul class="dropdown-menu">
@@ -92,7 +92,7 @@
         <div class="row">
             <div class="books">
 
-              <div id="firstShelf" class="shelf col-lg-4 col-md-4 col-sm-12 col-xs-12">                 
+              <div id="firstShelf" class="shelf col-lg-3 col-md-4 col-sm-12 col-xs-12 col-lg-offset-1">                 
                         <div class="cover">
                            <img src="" class="img-rounded">
                         </div>
@@ -105,21 +105,17 @@
                         <div class="resume">
                            <p class="synopsis"> </p>
                         </div>
-                        <div >
-                           <a class="links" href=""> </a>
+                        <div class="links" >
+                           <a href=""> Google Books </a>
                         </div>
 
                         <div class="buttonF">
                           <div class="btn-group">                           
-                              <button type="button" class="btn btn-like"> 
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Like
-                                <span class="numberl">0</span>
+                              <button type="button" class="btn btn-favorite"> 
+                              Add favorite
                               </button>
-                              <button type="button" class="btn btn-dislike">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Dislike
-                                <span class="numberd">0</span>
+                              <button type="button" class="btn btn-read">
+                                Interesting
                               </button>                            
                               <button type="button" class="btn btn-next">
                               Next                                 
@@ -129,7 +125,7 @@
               </div>
 
 
-              <div id="secondShelf" class="shelf col-lg-4 col-md-4 col-sm-12 col-xs-12">                 
+              <div id="secondShelf" class="shelf col-lg-3 col-md-4 col-sm-12 col-xs-12">                 
                         <div class="cover">
                            <img src="" class="img-rounded">
                         </div>
@@ -142,21 +138,17 @@
                         <div class="resume">
                            <p class="synopsis"> </p>
                         </div>
-                        <div >
-                           <a class="links" href=""> </a>
+                        <div class="links">
+                           <a href=""> Google Books </a>
                         </div>
 
                         <div class="buttonF">
                           <div class="btn-group">                           
-                              <button type="button" class="btn btn-like"> 
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Like
-                                <span class="numberl">0</span>
+                              <button type="button" class="btn btn-favorite"> 
+                              Add favorite
                               </button>
-                              <button type="button" class="btn btn-dislike">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Dislike
-                                <span class="numberd">0</span>
+                              <button type="button" class="btn btn-read">
+                                Interesting
                               </button>                            
                               <button type="button" class="btn btn-next">
                               Next                                 
@@ -165,7 +157,7 @@
                         </div>                 
                 </div>
 
-                <div id="thirdShelf" class="shelf col-lg-4 col-md-4 col-sm-12 col-xs-12">                 
+                <div id="thirdShelf" class="shelf col-lg-3 col-md-4 col-sm-12 col-xs-12">                 
                         <div class="cover">
                            <img src="" class="img-rounded">
                         </div>
@@ -178,21 +170,17 @@
                         <div class="resume">
                            <p class="synopsis"> </p>
                         </div>
-                        <div >
-                           <a class="links" href=""> </a>
+                        <div class="links">
+                           <a href=""> Google Books </a>
                         </div>
                         
                         <div class="buttonF">
                           <div class="btn-group">                           
-                              <button type="button" class="btn btn-like"> 
-                                <span class="glyphicon glyphicon-ok"></span>
-                                Like
-                                <span class="numberl">0</span>
+                              <button type="button" class="btn btn-favorite"> 
+                              Add favorite
                               </button>
-                              <button type="button" class="btn btn-dislike">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                Dislike
-                                <span class="numberd">0</span>
+                              <button type="button" class="btn btn-read">
+                                Interesting
                               </button>                            
                               <button type="button" class="btn btn-next">
                               Next                                 
@@ -224,7 +212,7 @@
        <!-- Latest compiled and minified JavaScript -->
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-       <script src="BookMe14_script.js"></script>
+       <script src="BookMe16_script.js"></script>
 
 
    </body>
