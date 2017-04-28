@@ -1,9 +1,48 @@
 .header {
-  background-color: hsl(142, 33%, 58%);
+  background-color: #945D60;
+  /*background-color: hsl(142, 33%, 58%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 60%;
+  background-image: url("http://clingdom.com/wp-content/uploads/2015/09/header-cloud.jpg");
+*/
+}
+
+body {
+  /*background-image: url("http://www.no-zaku.com/background/wp-content/uploads/sites/9/2016/11/Lovely-Web-Site-Background-Images.jpg");
+  */background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  background: white;
+}
+
+.navbar-default {
+  background-color: hsl(0, 0%, 100%) !important;
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff", endColorstr="#ffffff");
+  background-image: -khtml-gradient(linear, left top, left bottom, from(#ffffff), to(#ffffff));
+  background-image: -moz-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -ms-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #ffffff, #ffffff);
+  background-image: -o-linear-gradient(top, #ffffff, #ffffff);
+  background-image: linear-gradient(#ffffff, #ffffff);
+  border-color: #ffffff #ffffff hsl(0, 0%, 100%);
+  color: #333 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.00);
+  -webkit-font-smoothing: antialiased;
+}
+
+#footer {
+  padding-left: 10px;
+  color: white;
+  background-color: #3C3C3C;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .navbar {
   font-family: 'Josefin Slab', serif;
+  color: white;
 }
 
 .books {
@@ -39,7 +78,7 @@
   font-family: 'Josefin Slab', serif;
 	font-size: 50px;
   text-align: center;
-  color: #4f4f4f;
+  color: white;
   font-weight: bold;
 }
 
@@ -148,13 +187,6 @@
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
-#footer {
-  padding-left: 10px;
-  color: white;
-  background-color: #2d2d2d;
-  font-family: 'Open Sans Condensed', sans-serif;
-}
-
 h1 {
   font-weight: 50;
   font-size: 40px;
@@ -169,16 +201,16 @@ p {
   text-align: justify;
 }
 
-#firstShelf,#secondShelf{
+/*#firstShelf,#secondShelf{
   margin-top: 5px;
-  border-right: 3px solid #845757;
-  border-top: 1px solid #845757;
+  border-right: 3px solid #0A1C36;
+  border-top: 1px solid #0A1C36;
 }
 
 #seconShelf,#thirdShelf{
-  border-top: 1px solid #845757;
+  border-top: 1px solid #0A1C36;
 }
-}
+}*/
 
 
 

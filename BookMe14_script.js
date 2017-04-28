@@ -154,15 +154,14 @@ $("#searchB").submit(function(event){
 
 
 
-
-// Footer function
+// Footer function -----------------------------------------------------------------------------------------------
  $(window).ready(function footplace() {
    var docHeight = $(window).height();
    var footerHeight = $('#footer').height();
    var footerTop = $('#footer').position().top + footerHeight;
 
    if (footerTop < docHeight) {
-    $('#footer').css('margin-top', (docHeight - footerTop) + 'px');
+    $('#footer').css('margin-top', (docHeight - footerTop - 20) + 'px');
    }
   });
 
