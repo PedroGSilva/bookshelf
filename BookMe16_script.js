@@ -1,5 +1,5 @@
 
-// Class Book-----------------------------------------------------------
+// Class Book------------------------------------------------------------------------
 function Book (isbn,title,author,synopsis,img,links){
 	this.isbn = isbn;
 	this.title = title;
@@ -18,13 +18,15 @@ function Book (isbn,title,author,synopsis,img,links){
 		$("#" + id + " .synopsis").html(this.synopsis);
 		$("#" + id + " .links").attr("href",this.links);
 		
+		//Variavel para os Clicks
 		var data = {"book":this, "id":id};
+
+		//Favorite Click---------------------------
 		$("#" + id + " .btn-favorite").off("click");
 		$("#" + id + " .btn-favorite").click(data,function(event){
 			favorite.addFavBook(event.data.book);
 		})
-
-		var data = {"book":this, "id":id};
+		//Read Next Click-------------------------
 		$("#" + id + " .btn-dislike").off("click");
 		$("#" + id + " .btn-dislike").click(data,function(event){
 			event.data.book.dislike();
@@ -39,32 +41,6 @@ function Book (isbn,title,author,synopsis,img,links){
 	}
 }
 
-
-function FavoriteBooks (){
-	this.shelffav = new Queue();
-
-	this.addFavBook = function (book){
-		book.favbookshelf = this;	
-		this.shelffav.enqueue(book);
-	}
-
-	this.initFav = function (){
-		var fav1 = this.shelffav.dequeue();
-		var fav2 = this.shelffav.dequeue();
-		var fav3 = this.shelffav.dequeue();
-
-		fav1.render("firstShelf");
-		fav2.render("secondShelf");
-		fav3.render("thirdShelf");
-	}
-
-	this.nextFav = function (coluna){
-			var nextDeq = this.shelffav.dequeue();
-			nextDeq.render(coluna);
-	} 
-}
-
-var favorite = new FavoriteBooks();
 
 
 // Class Queue BookShelf---------------------------------------------------------
@@ -81,7 +57,7 @@ function Queue (){
 }
 
 
-// Class BookShelf-----------------------------------------------------
+// Class BookShelf-----------------------------------------------------------------------------------------
 function BookShelf (){
 	// criacao do dictionario shelf, ainda vazio
 	this.shelf = new Queue ();
@@ -138,7 +114,6 @@ function BookShelf (){
 		
 				bookShelf1.addBook(books);
 			}
-
 	bookShelf1.init();
 	}	
 
@@ -147,10 +122,11 @@ function BookShelf (){
 		searchmade = this;
 		searchmade.load(search);
 	}
-
 } 
 
-// Add Shelf to class BookShelf-----------------------------------------
+
+
+// Add Shelf to class BookShelf---------------------------------------------------------------------------
 var bookShelf1 = new BookShelf();
 
 bookShelf1.load("harry");
@@ -172,20 +148,100 @@ $("#favfolder").click(function(event){
 	favorite.initFav();
 })
 
+//TESTE -----------------------------------------------------------------
+function FavoriteBooks (){
+
+	this.addFavBook = function (book){
+		book.favbookshelf = this;	
+		this.favoritedb.createFavorite(book);
+	}
+
+	this.initFav = function (){
+		var fav1 = this.shelffav.dequeue();
+		var fav2 = this.shelffav.dequeue();
+		var fav3 = this.shelffav.dequeue();
+
+		fav1.render("firstShelf");
+		fav2.render("secondShelf");
+		fav3.render("thirdShelf");
+	}
+
+	this.nextFav = function (coluna){
+			var nextDeq = this.shelffav.dequeue();
+			nextDeq.render(coluna);
+	} 
+}
+var favorite = new FavoriteBooks();
+
+//Class DataBase------------------------------------------------------------------------------------------------------------------------------
+function DataBase(){
+	this.db = openDatabase('BookMetable2.db', '1.0', 'bd books', 2*1024*1024);
+
+	// Create tables for data base
+	this.createDataBases = function (){
+		this.db.transaction (function(tx){
+		    tx.executeSql("CREATE TABLE  IF NOT EXISTS USER ("+
+		    	"IP TEXT PRIMARY KEY NOT NULL,FOREIGN KEY (IP) REFERENCES RATE(IP));");
+
+		    /*tx.executeSql("CREATE TABLE IF NOT EXISTS FAVORITES ("+
+		    	"BOOK_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
+		    	"IP TEXT NOT NULL,TITLE TEXT NOT NULL,AUTHOR TEXT NOT NULL,IMG TEXT NOT NULL,GBLINK TEXT NOT NULL"+
+		    	"FOREIGN KEY (IP) REFERENCES USER(IP));");
+
+		    tx.executeSql("CREATE TABLE IF NOT EXISTS READNEXT ("+
+		    	"IP TEXT NOT NULL,BOOK_ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
+		    	"TITLE TEXT NOT NULL,AUTHOR TEXT NOT NULL,IMG TEXT NOT NULL,GBLINK TEXT NOT NULL"+
+		    	"FOREIGN KEY (IP) REFERENCES USER(IP));");*/
+		})
+	}
+
+	//Create User-------------------
+	this.createUser = function (IP){
+		this.db.transaction (function(tx){
+			tx.executeSql("INSERT INTO USER(IP) VALUES();");//ver como se adiciona o ip
+		})
+	}	
+	//Create Favorite---------------------
+	this.createFavorite = function (book){
+		this.db.transaction (function(tx){
+			tx.executeSql("INSERT INTO FAVORITES(IP,TITLE,AUTHOR,IMG,GBLINK) VALUES('120.0.0.1','"+book.title+"','"+book.author+"','"+book.img+"','"+book.links+"');");
+			tx.executeSql("SELECT * FROM FAVORITES",[],function(tx,results){
+				var len = results.rows.length,i;
+				for (i = 0; i < len; i++) {
+					alert(results.rows[i]['TITLE']);
+				}
+			});
+		})
+
+		this.db.transaction(function(tx){
+			tx.executeSql("SELECT * FROM FAVORITES",[],function(tx,results){
+				var len = results.rows.length,i;
+				for (i = 0; i < len; i++) {
+					alert(results.rows[i]['TITLE']);
+				}
+			});
+		})
+	}	
+	//Create ReadNext---------------------
+	this.createReadNext = function (book){
+		this.db.transaction (function(tx){
+			tx.executeSql("INSERT INTO READNEXT(IP,TITLE,AUTHOR,IMG,GBLINK) VALUES();");
+		})
+	}
+}
+var database = new DataBase();
+database.createDataBases();
 
 
-
-
-// Footer function
- $(window).ready(function footplace() {
+// Footer function-----------------------------------------------------------------
+$(window).ready(function footplace() {
    var docHeight = $(window).height();
    var footerHeight = $('#footer').height();
    var footerTop = $('#footer').position().top + footerHeight;
-
-   if (footerTop < docHeight) {
-    $('#footer').css('margin-top', (docHeight - footerTop) + 'px');
-   }
-  });
+	if (footerTop < docHeight) {
+    	$('#footer').css('margin-top', (docHeight - footerTop) + 'px');
+   	}
+})
 
 
 
